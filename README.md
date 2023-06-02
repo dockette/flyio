@@ -14,6 +14,13 @@
   <a href="https://github.com/sponsors/f3l1x"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
 </p>
 
+## Usecase
+
+`dockette/flyio` is suitable for your CI.
+
+Provided packages:
+- flyctl, make, git, openssl, docker
+
 ## Usage
 
 ```
