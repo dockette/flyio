@@ -1,4 +1,4 @@
-FROM dockette/alpine:3.17
+FROM dockette/alpine:3.18
 
 LABEL maintainer="sulcmil@gmail.com"
 
