@@ -8,7 +8,7 @@ ENV DEPLOYER_BIN=/usr/local/bin/dep
 # INSTALLATION
 RUN apk update && apk upgrade --no-cache  && \
     # DEPENDENCIES #############################################################
-    apk add --no-cache curl && \
+    apk add --no-cache curl git make && \
     # DEPLOYER #################################################################
     curl -L https://fly.io/install.sh | sh && \
     # CLEAN UP #################################################################
