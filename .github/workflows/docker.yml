@@ -1,0 +1,22 @@
+name: "Docker"
+
+on:
+  push:
+    branches: ["master"]
+
+  schedule:
+    - cron: "0 8 * * 1"
+
+jobs:
+  build:
+    name: "Build"
+    uses: dockette/.github/.github/workflows/docker.yml@master
+    secrets: inherit
+    with:
+        image: "dockette/flyio"
+        tag: "${{ matrix.tag }}"
+        context: "${{ matrix.context }}"
+    strategy:
+      matrix:
+        include:
+          - { context: flyio, tag: latest }
