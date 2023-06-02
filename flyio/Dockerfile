@@ -2,8 +2,7 @@ FROM dockette/alpine:3.18
 
 LABEL maintainer="sulcmil@gmail.com"
 
-ENV DEPLOYER_VERSION=7.0.2
-ENV DEPLOYER_BIN=/usr/local/bin/dep
+ENV FLYCTL_INSTALL=/usr/local
 
 # INSTALLATION
 RUN apk update && apk upgrade --no-cache  && \
