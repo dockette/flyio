@@ -9,9 +9,10 @@
 </p>
 
 <p align=center>
-  <a href="https://hub.docker.com/r/dockette/flyio/"><img src="https://badgen.net/docker/pulls/dockette/flyio"></a>
-  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
-  <a href="https://github.com/sponsors/f3l1x"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+  <a href="https://github.com/dockette/flyio/actions"><img src="https://github.com/dockette/flyio/actions/workflows/docker.yml/badge.svg"></a>
+  <a href="https://hub.docker.com/r/dockette/flyio"><img src="https://img.shields.io/docker/pulls/dockette/flyio.svg"></a>
+  <a href="https://github.com/sponsors/f3l1x"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa"></a>
+  <a href="https://github.com/orgs/dockette/discussions"><img src="https://img.shields.io/badge/support-discussions-6f42c1"></a>
 </p>
 
 ## Usecase
@@ -31,16 +32,6 @@ docker run \
 	flyctl -v
 ```
 
-## Development
+## Maintenance
 
-See [how to contribute](https://contributte.org/contributing.html) to this package.
-
-This package is currently maintaining by these authors.
-
-<a href="https://github.com/f3l1x">
-    <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
-</a>
-
------
-
-Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Also thank you for using this package.
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.

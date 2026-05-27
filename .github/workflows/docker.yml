@@ -11,15 +11,43 @@ permissions:
   contents: read
 
 jobs:
+  test:
+    name: "Test"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Build"
+        run: make build
+
+      - name: "Test"
+        run: make test
+
   build:
     name: "Build"
+    needs: ["test"]
     uses: dockette/.github/.github/workflows/docker.yml@master
     secrets: inherit
     with:
-        image: "dockette/flyio"
-        tag: "${{ matrix.tag }}"
-        context: "${{ matrix.context }}"
+      image: "dockette/flyio"
+      tag: "${{ matrix.tag }}"
+      context: "${{ matrix.context }}"
     strategy:
       matrix:
         include:
           - { context: flyio, tag: latest }
+
+  docs:
+    name: "Docs"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Docker Hub Description"
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: "${{ secrets.DOCKERHUB_USERNAME }}"
+          password: "${{ secrets.DOCKERHUB_TOKEN }}"
+          repository: "dockette/flyio"
