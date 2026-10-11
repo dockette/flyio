@@ -1,6 +1,8 @@
 name: "Docker"
 
 on:
+  workflow_dispatch:
+
   push:
     branches: ["master"]
 
@@ -40,14 +42,9 @@ jobs:
 
   docs:
     name: "Docs"
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-
-      - name: "Docker Hub Description"
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: "${{ secrets.DOCKERHUB_USERNAME }}"
-          password: "${{ secrets.DOCKERHUB_TOKEN }}"
-          repository: "dockette/flyio"
+    needs: ["build"]
+    if: github.ref == 'refs/heads/master'
+    uses: dockette/.github/.github/workflows/dockerhub-description.yml@master
+    secrets: inherit
+    with:
+      image: "dockette/flyio"
