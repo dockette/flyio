@@ -26,9 +26,22 @@ jobs:
       - name: "Test"
         run: make test
 
+  version:
+    name: "Version"
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Read VERSION
+        id: version
+        run: echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
+
   build:
     name: "Build"
-    needs: ["test"]
+    needs: ["test", "version"]
     uses: dockette/.github/.github/workflows/docker.yml@master
     secrets: inherit
     with:
@@ -39,6 +52,23 @@ jobs:
       matrix:
         include:
           - { context: flyio, tag: latest }
+          - { context: flyio, tag: "${{ needs.version.outputs.version }}" }
+
+  release:
+    name: "Release"
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release view "$(cat VERSION)" || gh release create "$(cat VERSION)" --generate-notes
 
   docs:
     name: "Docs"
