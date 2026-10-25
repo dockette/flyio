@@ -1,6 +1,6 @@
-VERSION:=$(shell cat VERSION)
+include VERSION
 
-.PHONY: build test run version release
+.PHONY: build test run
 
 build:
 	docker build -t dockette/flyio flyio
@@ -11,10 +11,11 @@ test:
 run:
 	docker run -it --rm dockette/flyio sh
 
+.PHONY: version
 version:
 	@echo ${VERSION}
 
+.PHONY: release
 release:
-	@date -u +%Y.%m.%d > VERSION
-	@echo "VERSION: ${VERSION} -> $$(cat VERSION)"
-	@echo "next: git commit -am \"Release: $$(cat VERSION)\" && git push"
+	@sed -i.bak "s/^VERSION=.*/VERSION=$$(date -u +%Y.%m.%d)/" VERSION && rm VERSION.bak
+	@cat VERSION

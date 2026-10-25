@@ -15,28 +15,42 @@
   <a href="https://github.com/orgs/dockette/discussions"><img src="https://img.shields.io/badge/support-discussions-6f42c1"></a>
 </p>
 
-## Usecase
+-----
 
-`dockette/flyio` is suitable for your CI.
+A CI toolbox for [Fly.io](https://fly.io) deploys: `flyctl` on Alpine, with the tools a pipeline needs.
 
-Provided packages:
-- flyctl, make, git, openssl, docker
+## Features
+
+- `flyctl`, `make`, `git`, `openssl` and `docker` on `dockette/alpine:3.18`
+- Working directory `/srv`, default command `flyctl`
 
 ## Usage
 
-```
-docker run \
-	-it \
-	--rm \
-	dockette/flyio \
-	flyctl -v
+```sh
+# Print the flyctl version
+docker run -it --rm dockette/flyio flyctl -v
 ```
 
 ## Versions
 
-The release version is the date in [`VERSION`](VERSION). CI pushes `latest` also as `dockette/flyio:<VERSION>`.
-To release, run `make release`, commit and push to `master`.
+| Version | Release |
+|---------|---------|
+| `dockette/flyio:YYYY.MM.DD` | release `YYYY.MM.DD` |
+| `dockette/flyio:latest` | latest build of `master` |
+
+Releases are listed on [GitHub](https://github.com/dockette/flyio/releases).
+
+## Development
+
+```sh
+make build          # build the image
+make test           # print the flyctl version
+make run            # open a shell in the image
+make version        # print VERSION
+make release        # set today's date in VERSION
+```
 
 ## Maintenance
 
-See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to
+[support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
